@@ -64,9 +64,22 @@ async def get_user(id: UUID) -> GetUserResponse | dict:
     return db.get(id, dict())
 
 
-@app.get("/users/{id}/raw")
+@app.get("/users/")
+async def list_users() -> list[GetUserResponse] | list:
+    return db.values()
+
+
+#
+# The routes below are for demo purposes
+#
+@app.get("/users/raw/{id}")
 async def get_raw_user(id: UUID) -> User | dict:
     return db.get(id, dict())
+
+
+@app.get("/users/raw/")
+async def list_raw_users() -> list[User] | list:
+    return db.values()
 
 
 if __name__ == "__main__":
