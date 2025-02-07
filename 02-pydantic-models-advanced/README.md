@@ -52,6 +52,6 @@ Get raw user data
 export USER_ID="..."
 
 curl -X 'GET' \
-  "http://localhost:8000/users/${USER_ID}/raw" \
+  "http://localhost:8000/users/raw/${USER_ID}" \
   -H 'accept: application/json'
 ```
