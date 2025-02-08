@@ -37,7 +37,6 @@ class CreateUserRequest(BaseModel):
 class User(CreateUserRequest):
     id: UUID = Field(default_factory=uuid4)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    password: bytes
 
 
 class CreateUserResponse(BaseModel):
