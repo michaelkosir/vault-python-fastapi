@@ -51,7 +51,7 @@ class GetUserResponse(BaseModel):
 
 
 @app.post("/users/")
-async def create_user(user: CreateUserRequest) -> CreateUserResponse:
+def create_user(user: CreateUserRequest) -> CreateUserResponse:
     user = User(**user.model_dump())
     user.password = bcrypt.hashpw(user.password, bcrypt.gensalt())
     db[user.id] = user
@@ -59,12 +59,12 @@ async def create_user(user: CreateUserRequest) -> CreateUserResponse:
 
 
 @app.get("/users/{id}")
-async def get_user(id: UUID) -> GetUserResponse | dict:
+def get_user(id: UUID) -> GetUserResponse | dict:
     return db.get(id, dict())
 
 
 @app.get("/users/")
-async def list_users() -> list[GetUserResponse] | list:
+def list_users() -> list[GetUserResponse] | list:
     return db.values()
 
 
@@ -72,12 +72,12 @@ async def list_users() -> list[GetUserResponse] | list:
 # The routes below are for demo purposes
 #
 @app.get("/users/raw/{id}")
-async def get_raw_user(id: UUID) -> User | dict:
+def get_raw_user(id: UUID) -> User | dict:
     return db.get(id, dict())
 
 
 @app.get("/users/raw/")
-async def list_raw_users() -> list[User] | list:
+def list_raw_users() -> list[User] | list:
     return db.values()
 
 
